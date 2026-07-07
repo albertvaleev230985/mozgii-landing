@@ -54,6 +54,7 @@
   .rule{height:3px;width:200px;border-radius:3px;margin:0 0 26px;background:linear-gradient(90deg,var(--coral),var(--coral-deep));box-shadow:0 0 18px var(--coral-glow);transform-origin:left center}
   .lead{font-size:clamp(1.15rem,2.3vw,1.6rem);font-weight:400;line-height:1.36;color:#CDD2E0;max-width:24ch;margin-bottom:40px}
   .lead .acc{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--coral);font-size:1.12em}
+  .lead .acc-r{color:var(--teal)}
   .meta{display:grid;grid-template-columns:repeat(4,auto);gap:0 36px;margin-bottom:42px;width:fit-content}
   .meta .k{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:7px}
   .meta .v{display:block;font-size:15px;font-weight:600;color:var(--ivory)}
@@ -69,7 +70,9 @@
 
   /* brain stage */
   .stage{position:relative;z-index:2;width:100%;aspect-ratio:1/1;max-height:88svh;justify-self:center}
-  .halo{position:absolute;border-radius:50%;filter:blur(64px);pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(255,111,97,.32),transparent 70%);width:66%;height:66%;left:17%;top:17%;animation:breathe 6.5s ease-in-out infinite}
+  .halo{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:1;width:52%;height:60%;top:20%;animation:breathe 6.5s ease-in-out infinite}
+  .halo-l{left:5%;background:radial-gradient(circle,rgba(255,111,97,.34),transparent 70%)}
+  .halo-r{right:5%;background:radial-gradient(circle,rgba(79,209,197,.24),transparent 70%);animation-direction:reverse}
   @keyframes breathe{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.9;transform:scale(1.06)}}
   #brainWrap{position:absolute;inset:0;z-index:2;will-change:transform}
   .brain-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:scale(.94);transition:opacity 1.3s ease,transform 1.3s cubic-bezier(.16,1,.3,1);filter:saturate(1.02)}
@@ -111,7 +114,7 @@
       <div class="eyebrow reveal d1">neovida · практикум</div>
       <h1 class="reveal d2">Практикум<br><span class="q">«</span><span class="m">мозг</span><span class="ii">ИИ</span><span class="q">»</span></h1>
       <div class="rule reveal d3"></div>
-      <p class="lead reveal d3">С вас <span class="acc">идея</span>, с ИИ <span class="acc">реализация</span></p>
+      <p class="lead reveal d3">С вас <span class="acc">идея</span>, с ИИ <span class="acc acc-r">реализация</span></p>
 
       <div class="meta reveal d4">
         <div><span class="k">формат</span><span class="v">Онлайн</span></div>
@@ -127,7 +130,8 @@
     </div>
 
     <div class="stage">
-      <div class="halo"></div>
+      <div class="halo halo-l"></div>
+      <div class="halo halo-r"></div>
       <div id="brainWrap">
         <img class="brain-img" src="assets/brain.png" alt="Мозг: человек и ИИ" decoding="async">
         <canvas id="fx" aria-hidden="true"></canvas>
@@ -153,13 +157,15 @@
     ctx.clearRect(0,0,W,H);ctx.globalCompositeOperation='lighter';
     /* ambient sparks */
     for(var i=0;i<parts.length;i++){var p=parts[i];p.x+=p.drift*0.5;if(p.x>cx+R*1.25)p.x=cx-R*0.2+Math.random()*R*0.4;
-      var tw=0.4+0.6*Math.sin(t*p.sp+p.ph);
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);ctx.fillStyle='rgba(255,150,120,'+(0.25*tw)+')';ctx.shadowBlur=7;ctx.shadowColor='rgba(255,111,97,0.7)';ctx.fill();}
+      var tw=0.4+0.6*Math.sin(t*p.sp+p.ph),teal=p.x>cx;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);
+      ctx.fillStyle=teal?'rgba(120,220,205,'+(0.24*tw)+')':'rgba(255,150,120,'+(0.24*tw)+')';
+      ctx.shadowBlur=7;ctx.shadowColor=teal?'rgba(79,209,197,0.7)':'rgba(255,111,97,0.7)';ctx.fill();}
     ctx.shadowBlur=0;
     /* right-edge dissolve particles */
     if(!reduce){if(flow.length<40&&Math.random()<0.7){var yy=cy+(Math.random()*2-1)*R*0.7;flow.push({x:cx+R*0.42,y:yy,vx:0.5+Math.random()*1.1,vy:(Math.random()-0.5)*0.3,life:0,max:70+Math.random()*60,s:0.7+Math.random()*1.5});}
       for(var f=flow.length-1;f>=0;f--){var q=flow[f];q.life++;q.x+=q.vx;q.y+=q.vy;var lt=q.life/q.max;if(lt>=1){flow.splice(f,1);continue;}
-        ctx.beginPath();ctx.arc(q.x,q.y,q.s,0,6.28);ctx.fillStyle='rgba(255,180,150,'+Math.sin(lt*Math.PI)*0.7+')';ctx.shadowBlur=8;ctx.shadowColor='rgba(255,140,110,0.8)';ctx.fill();}
+        ctx.beginPath();ctx.arc(q.x,q.y,q.s,0,6.28);ctx.fillStyle='rgba(140,225,210,'+Math.sin(lt*Math.PI)*0.75+')';ctx.shadowBlur=8;ctx.shadowColor='rgba(79,209,197,0.85)';ctx.fill();}
       ctx.shadowBlur=0;}
     ctx.globalCompositeOperation='source-over';
   }
