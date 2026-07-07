@@ -22,14 +22,8 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  body{background:var(--night);color:var(--ivory);font-family:var(--body);font-weight:400;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:'ss01','cv01','cv11';overflow-x:hidden;cursor:none}
+  body{background:var(--night);color:var(--ivory);font-family:var(--body);font-weight:400;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:'ss01','cv01','cv11';overflow-x:hidden}
   a{color:inherit;text-decoration:none}
-  input,textarea,select,button{cursor:auto}
-
-  .cursor{position:fixed;top:0;left:0;width:36px;height:36px;border-radius:50%;background:radial-gradient(circle,rgba(255,111,97,.18) 0%,rgba(255,111,97,.08) 40%,transparent 70%);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:screen;transition:width .2s ease,height .2s ease,background .2s ease}
-  .cursor.hover{width:64px;height:64px;background:radial-gradient(circle,rgba(255,111,97,.34) 0%,rgba(255,111,97,.14) 45%,transparent 75%)}
-  .cursor-dot{position:fixed;top:0;left:0;width:6px;height:6px;background:var(--coral);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%)}
-  @media (hover:none){body{cursor:auto}.cursor,.cursor-dot{display:none}}
 
   .hero{position:relative;min-height:100svh;width:100%;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;gap:clamp(4px,1vw,24px);padding:clamp(20px,4vw,64px);overflow:hidden}
   .hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
@@ -60,7 +54,7 @@
   .meta .k{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-bottom:7px}
   .meta .v{display:block;font-size:15px;font-weight:600;color:var(--ivory)}
   .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:14px;padding:18px 28px;background:var(--coral);color:var(--night);border-radius:999px;font-size:15px;font-weight:600;border:none;cursor:none;transition:background .2s ease,transform .2s ease,box-shadow .2s ease;position:relative;overflow:hidden;letter-spacing:-.005em}
+  .btn{display:inline-flex;align-items:center;gap:14px;padding:18px 28px;background:var(--coral);color:var(--night);border-radius:999px;font-size:15px;font-weight:600;border:none;cursor:pointer;transition:background .2s ease,transform .2s ease,box-shadow .2s ease;position:relative;overflow:hidden;letter-spacing:-.005em}
   .btn::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.25) 50%,transparent 70%);transform:translateX(-100%);transition:transform .7s cubic-bezier(.16,1,.3,1)}
   .btn:hover::before{transform:translateX(100%)}
   .btn:hover{background:var(--coral-deep);transform:translateY(-2px);box-shadow:0 12px 32px -8px var(--coral-glow)}
@@ -70,10 +64,10 @@
   .btn.ghost:hover{background:rgba(255,255,255,.05);border-color:var(--coral);box-shadow:none}
 
   .stage{position:relative;z-index:2;width:112%;aspect-ratio:1/1;max-height:96svh;justify-self:start;margin-left:-10%}
-  .halo{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:1;width:48%;height:56%;top:22%;animation:breathe 6.5s ease-in-out infinite}
+  .halo{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:1;width:48%;height:56%;top:22%;animation:breathe 7s ease-in-out infinite}
   .halo-l{left:12%;background:radial-gradient(circle,rgba(255,111,97,.3),transparent 70%)}
   .halo-r{right:10%;background:radial-gradient(circle,rgba(79,209,197,.26),transparent 70%);animation-direction:reverse}
-  @keyframes breathe{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.9;transform:scale(1.06)}}
+  @keyframes breathe{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.9;transform:scale(1.05)}}
   #brainWrap{position:absolute;inset:0;z-index:2;will-change:transform}
   .brain-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:scale(.94);transition:opacity 1.3s ease,transform 1.3s cubic-bezier(.16,1,.3,1)}
   .ready .brain-img{opacity:1;transform:scale(1)}
@@ -101,9 +95,6 @@
 </style>
 </head>
 <body>
-  <div class="cursor" aria-hidden="true"></div>
-  <div class="cursor-dot" aria-hidden="true"></div>
-
   <section class="hero" id="hero">
     <div class="topbar">
       <div class="brandmark reveal d1">neovida<b>.ai</b></div>
@@ -133,7 +124,7 @@
       <div class="halo halo-l"></div>
       <div class="halo halo-r"></div>
       <div id="brainWrap">
-        <img class="brain-img" src="assets/brain-left.png" alt="Мозг: человек и ИИ" decoding="async">
+        <img class="brain-img" src="assets/brain.png" alt="Мозг: человек и ИИ" decoding="async">
         <canvas id="fx" aria-hidden="true"></canvas>
       </div>
     </div>
@@ -142,106 +133,65 @@
   </section>
 
 <script>
-/* ===== Right hemisphere = live neural net + circulation of neurons (coral -> teal, looping) ===== */
+/* ===== Light living particles AROUND the brain (image stays the brain) ===== */
 (function(){
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
   var stage=document.querySelector('.stage'), wrap=document.getElementById('brainWrap');
   var canvas=document.getElementById('fx'), ctx=canvas.getContext('2d');
-  var W,H,DPR,cx,cy,R;
-  var nodes=[], edges=[], imp=[], parts=[], feed=[];
-  var sprCoral,sprTeal,sprWhite;
+  var W,H,DPR,cx,cy,R, sprT,sprC,sprW, dust=[], flow=[];
 
-  function sprite(r,g,b){var c=document.createElement('canvas');c.width=c.height=32;var x=c.getContext('2d');
-    var gr=x.createRadialGradient(16,16,0,16,16,16);
-    gr.addColorStop(0,'rgba('+r+','+g+','+b+',1)');gr.addColorStop(0.25,'rgba('+r+','+g+','+b+',0.55)');gr.addColorStop(1,'rgba('+r+','+g+','+b+',0)');
-    x.fillStyle=gr;x.fillRect(0,0,32,32);return c;}
+  function sprite(r,g,b){var c=document.createElement('canvas');c.width=c.height=24;var x=c.getContext('2d');
+    var gr=x.createRadialGradient(12,12,0,12,12,12);gr.addColorStop(0,'rgba('+r+','+g+','+b+',1)');gr.addColorStop(0.3,'rgba('+r+','+g+','+b+',0.5)');gr.addColorStop(1,'rgba('+r+','+g+','+b+',0)');
+    x.fillStyle=gr;x.fillRect(0,0,24,24);return c;}
 
-  /* right hemisphere ellipse (mirror of the coral one), x>cx */
-  function inHemi(x,y){var dx=(x-(cx+R*0.40))/(R*0.50), dy=(y-cy)/(R*0.74);return dx*dx+dy*dy<=1;}
+  function mkDust(){ /* around the digital (right) hemisphere + dissolve zone */
+    return{x:cx+R*(0.35+Math.random()*0.95), y:cy+(Math.random()*2-1)*R*0.9,
+      vx:0.12+Math.random()*0.5, vy:(Math.random()-0.5)*0.35, sz:3+Math.random()*6,
+      ph:Math.random()*6.28, sp:0.6+Math.random()*1.2};}
 
-  function build(){
-    /* neural nodes filling the right hemisphere */
-    nodes=[];var g=0;
-    while(nodes.length<140 && g<9000){g++;
-      var nx=cx+R*0.02+Math.random()*R*0.95, ny=cy+(Math.random()*2-1)*R*0.78;
-      if(inHemi(nx,ny)) nodes.push({x:nx,y:ny,ph:Math.random()*6.28,s:3.5+Math.random()*6});
-    }
-    edges=[];
-    for(var a=0;a<nodes.length;a++){var deg=0;
-      for(var b=a+1;b<nodes.length;b++){var dx=nodes[a].x-nodes[b].x,dy=nodes[a].y-nodes[b].y;
-        if(dx*dx+dy*dy<(R*0.26)*(R*0.26)){edges.push([a,b]);if(++deg>3)break;}}}
-    imp=[];for(var e=0;e<edges.length;e++)if(Math.random()<0.6)imp.push({e:e,t:Math.random(),spd:0.005+Math.random()*0.009});
-    /* circulation particles orbiting the fissure center — coral(left) -> teal(right), looping */
-    parts=[];for(var i=0;i<150;i++){
-      parts.push({a:Math.random()*6.2832, r:R*(0.05+Math.random()*0.52), ry:0.9+Math.random()*0.28,
-        w:(0.004+Math.random()*0.008)*(Math.random()<0.5?1:-1), sz:4+Math.random()*8, tw:Math.random()*6.28, tws:0.7+Math.random()*1.4});
-    }
-    feed=[];
-  }
-  function resize(){var r=stage.getBoundingClientRect();W=r.width;H=r.height;DPR=Math.min(window.devicePixelRatio||1,2);
+  function resize(){var r=stage.getBoundingClientRect();W=r.width;H=r.height;DPR=Math.min(window.devicePixelRatio||1,1.5);
     canvas.style.width=W+'px';canvas.style.height=H+'px';canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);ctx.setTransform(DPR,0,0,DPR,0,0);
     cx=W*0.5;cy=H*0.5;R=Math.min(W,H)*0.40;
-    sprCoral=sprite(255,120,100);sprTeal=sprite(110,225,210);sprWhite=sprite(255,244,230);
-    build();}
+    sprT=sprite(120,225,210);sprC=sprite(255,140,110);sprW=sprite(255,244,230);
+    dust=[];for(var i=0;i<40;i++)dust.push(mkDust());flow=[];}
 
   function draw(t){
-    ctx.clearRect(0,0,W,H);
-    ctx.globalCompositeOperation='lighter';
+    ctx.clearRect(0,0,W,H);ctx.globalCompositeOperation='lighter';
+    var step=reduce?0:1;
 
-    /* --- right hemisphere neural scaffold --- */
-    ctx.lineWidth=0.7;ctx.strokeStyle='rgba(79,209,197,0.14)';
-    ctx.beginPath();
-    for(var e=0;e<edges.length;e++){var A=nodes[edges[e][0]],B=nodes[edges[e][1]];ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);}
-    ctx.stroke();
-    for(var n=0;n<nodes.length;n++){var nd=nodes[n],pu=0.5+0.5*Math.sin(t*2+nd.ph),sz=nd.s*(0.7+0.5*pu);
-      ctx.globalAlpha=0.35+0.4*pu;ctx.drawImage(sprTeal,nd.x-sz/2,nd.y-sz/2,sz,sz);}
-    ctx.globalAlpha=1;
-    if(!reduce)for(var m=0;m<imp.length;m++){var q=imp[m];q.t+=q.spd;if(q.t>1)q.t-=1;var ed=edges[q.e],a2=nodes[ed[0]],b2=nodes[ed[1]];
-      var x=a2.x+(b2.x-a2.x)*q.t,y=a2.y+(b2.y-a2.y)*q.t;ctx.globalAlpha=0.9;ctx.drawImage(sprWhite,x-4,y-4,8,8);}
-    ctx.globalAlpha=1;
+    /* floating neurons around the digital hemisphere (light) */
+    for(var i=0;i<dust.length;i++){var d=dust[i];d.x+=d.vx*step;d.y+=(d.vy+Math.sin(t*0.6+d.ph)*0.14)*step;
+      if(d.x>cx+R*1.45||d.y<cy-R*1.05||d.y>cy+R*1.05){var nd=mkDust();d.x=nd.x;d.y=nd.y;d.vx=nd.vx;d.vy=nd.vy;}
+      var tw=0.3+0.7*Math.sin(t*d.sp+d.ph),sz=d.sz*(0.6+0.6*tw);
+      ctx.globalAlpha=0.5*tw;ctx.drawImage(sprT,d.x-sz/2,d.y-sz/2,sz,sz);}
 
-    /* --- teal neurons circulating INSIDE the digital hemisphere --- */
-    var step=reduce?0:1, ox=cx+R*0.40;
-    for(var i=0;i<parts.length;i++){var p=parts[i];p.a+=p.w*step;
-      var x=ox+Math.cos(p.a)*p.r, y=cy+Math.sin(p.a)*p.r*p.ry;
-      var tw=0.35+0.65*Math.sin(t*p.tws+p.tw), sz=p.sz*(0.55+0.6*tw);
-      ctx.globalAlpha=0.5*tw;ctx.drawImage(sprTeal, x-sz/2, y-sz/2, sz, sz);
-    }
-    /* --- feed stream: neurons cross from the coral brain into the net (coral -> teal) --- */
+    /* gentle idea -> realization flow across the fissure (few particles, coral -> teal) */
     if(step){
-      if(feed.length<44&&Math.random()<0.9){var fy=cy+(Math.random()*2-1)*R*0.6;feed.push({x:cx-R*0.5,y:fy,vx:1.0+Math.random()*1.3,vy:(Math.random()-0.5)*0.3,life:0,max:78+Math.random()*44,sz:5+Math.random()*7});}
-      for(var f=feed.length-1;f>=0;f--){var fp=feed[f];fp.life++;fp.x+=fp.vx;fp.y+=fp.vy;var lt=fp.life/fp.max;
-        if(lt>=1||fp.x>cx+R*0.7){feed.splice(f,1);continue;}
-        var mt=Math.max(0,Math.min(1,(fp.x-(cx-R*0.22))/(R*0.3))),near=Math.abs(fp.x-cx)<R*0.07,al=Math.sin(lt*Math.PI);
-        ctx.globalAlpha=al*0.85;ctx.drawImage(mt<0.5?sprCoral:sprTeal, fp.x-fp.sz/2, fp.y-fp.sz/2, fp.sz*(near?1.6:1), fp.sz*(near?1.6:1));
-        if(near){ctx.globalAlpha=al;ctx.drawImage(sprWhite,fp.x-fp.sz*0.6,fp.y-fp.sz*0.6,fp.sz*1.2,fp.sz*1.2);}
-      }
+      if(flow.length<12&&Math.random()<0.5){flow.push({x:cx-R*0.42,y:cy+(Math.random()*2-1)*R*0.55,vx:0.8+Math.random()*0.9,vy:(Math.random()-0.5)*0.2,life:0,max:90+Math.random()*40,sz:4+Math.random()*4});}
+      for(var f=flow.length-1;f>=0;f--){var p=flow[f];p.life++;p.x+=p.vx;p.y+=p.vy;var lt=p.life/p.max;
+        if(lt>=1||p.x>cx+R*0.55){flow.splice(f,1);continue;}
+        var mt=Math.max(0,Math.min(1,(p.x-(cx-R*0.18))/(R*0.26))),near=Math.abs(p.x-cx)<R*0.06,al=Math.sin(lt*Math.PI);
+        ctx.globalAlpha=al*0.8;ctx.drawImage(mt<0.5?sprC:sprT,p.x-p.sz/2,p.y-p.sz/2,p.sz*(near?1.6:1),p.sz*(near?1.6:1));
+        if(near){ctx.globalAlpha=al;ctx.drawImage(sprW,p.x-p.sz*0.6,p.y-p.sz*0.6,p.sz*1.2,p.sz*1.2);}}
     }
-    ctx.globalAlpha=1;
-    ctx.globalCompositeOperation='source-over';
+    ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
   }
-
   function frame(ts){draw((ts||0)*0.001);requestAnimationFrame(frame);}
   resize();var rz;window.addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(resize,150);});
   if(reduce){draw(0);}else{requestAnimationFrame(frame);}
 
+  /* light parallax + idle float */
   if(!reduce){var tx=0,ty=0,ux=0,uy=0,hero=document.getElementById('hero');
-    hero.addEventListener('mousemove',function(e){var r=hero.getBoundingClientRect();tx=(e.clientX-r.left)/r.width-0.5;ty=(e.clientY-r.top)/r.height-0.5;});
+    hero.addEventListener('mousemove',function(e){var r=hero.getBoundingClientRect();tx=(e.clientX-r.left)/r.width-0.5;ty=(e.clientY-r.top)/r.height-0.5;},{passive:true});
     hero.addEventListener('mouseleave',function(){tx=0;ty=0;});
-    (function pl(ts){ux+=(tx-ux)*0.05;uy+=(ty-uy)*0.05;var fl=Math.sin((ts||0)*0.0006)*3;wrap.style.transform='translate('+(ux*12)+'px,'+(uy*9+fl)+'px)';requestAnimationFrame(pl);})();}
+    (function pl(ts){ux+=(tx-ux)*0.05;uy+=(ty-uy)*0.05;var fl=Math.sin((ts||0)*0.0006)*3;wrap.style.transform='translate('+(ux*10)+'px,'+(uy*8+fl)+'px)';requestAnimationFrame(pl);})();}
 })();
 
-/* reveal + cursor */
+/* reveal */
 (function(){
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal').forEach(function(r){io.observe(r);});
   requestAnimationFrame(function(){setTimeout(function(){document.getElementById('hero').classList.add('ready');},80);});
-
-  var cur=document.querySelector('.cursor'),dot=document.querySelector('.cursor-dot');
-  if(cur&&!matchMedia('(hover:none)').matches){
-    addEventListener('mousemove',function(e){cur.style.left=dot.style.left=e.clientX+'px';cur.style.top=dot.style.top=e.clientY+'px';});
-    document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){cur.classList.add('hover');});el.addEventListener('mouseleave',function(){cur.classList.remove('hover');});});
-  }
 })();
 </script>
 </body>
