@@ -34,10 +34,16 @@
       radial-gradient(36vw 36vw at 76% 48%,rgba(79,209,197,0.09),transparent 60%),
       linear-gradient(180deg,var(--night),#080D1A 60%,var(--night-deep))}
 
-  .topbar{position:absolute;z-index:5;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:clamp(18px,3vw,30px) clamp(20px,4vw,64px)}
-  .brandmark{font-weight:800;font-size:18px;letter-spacing:-.01em;color:#fff}
-  .brandmark b{color:var(--coral);font-weight:800}
-  .topbar .role{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid)}
+  .topbar{position:absolute;z-index:5;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:clamp(18px,3vw,28px) clamp(20px,4vw,64px)}
+  .brandmark{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;letter-spacing:-.02em;color:#fff}
+  .brandmark .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--coral),var(--coral-deep));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px -6px var(--coral-glow)}
+  .brandmark .logo b{color:#fff;font-size:17px;font-weight:900}
+  .brandmark span b{color:var(--coral)}
+  .nav{display:flex;align-items:center;gap:clamp(18px,2.4vw,30px);font-size:14.5px;font-weight:500}
+  .nav a{color:#C4CAD8;transition:color .2s ease}
+  .nav a:hover{color:var(--coral)}
+  .nav .nav-cta{padding:9px 18px;border:1px solid var(--rule);border-radius:999px;color:var(--ivory);transition:border-color .2s ease,background .2s ease}
+  .nav .nav-cta:hover{border-color:var(--coral);background:rgba(255,111,97,.1);color:#fff}
 
   .copy{position:relative;z-index:3;max-width:600px;justify-self:end}
   .kicker{font-family:var(--mono);font-size:clamp(13px,1.5vw,16px);letter-spacing:.28em;text-transform:uppercase;color:var(--mid);display:flex;align-items:center;gap:11px;margin-bottom:14px;padding-left:4px}
@@ -83,22 +89,27 @@
   .rule.reveal.in{transform:scaleX(1)}
 
   @media (max-width:900px){
-    .hero{grid-template-columns:1fr;grid-template-rows:auto auto;padding-top:84px;gap:8px}
+    .hero{grid-template-columns:1fr;grid-template-rows:auto auto;padding-top:88px;gap:8px}
     .stage{order:-1;max-height:40svh;aspect-ratio:1/1;width:96%;margin:0 auto}
     .copy{max-width:none;justify-self:stretch}
     h1{font-size:clamp(4rem,20vw,7rem)}
     .meta{grid-template-columns:1fr 1fr;gap:16px 24px}
+    .nav a:not(.nav-cta){display:none}
     .hint{display:none}
   }
-  @media (max-width:420px){.meta{grid-template-columns:1fr 1fr}.btn{flex:1;justify-content:center}.topbar .role{display:none}}
+  @media (max-width:420px){.meta{grid-template-columns:1fr 1fr}.btn{flex:1;justify-content:center}}
   @media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}.halo,.hint .ch{animation:none}.brain-img{opacity:1;transform:none}}
 </style>
 </head>
 <body>
   <section class="hero" id="hero">
     <div class="topbar">
-      <div class="brandmark reveal d1">neovida<b>.ai</b></div>
-      <div class="role reveal d1">практикум · 4 уровня</div>
+      <a href="#top" class="brandmark reveal d1"><span class="logo"><b>n</b></span><span>neovida<b>.ai</b></span></a>
+      <nav class="nav reveal d1">
+        <a href="#program">Программа</a>
+        <a href="#host">Ведущие</a>
+        <a href="#signup" class="nav-cta">Записаться</a>
+      </nav>
     </div>
 
     <div class="copy">
@@ -133,12 +144,12 @@
   </section>
 
 <script>
-/* ===== Living synapses over the digital hemisphere + idea->realization flow (light) ===== */
+/* ===== Living synapses (gentle vertical sway) + slow idea->realization flow (hard color switch at the fissure) ===== */
 (function(){
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
   var stage=document.querySelector('.stage'), wrap=document.getElementById('brainWrap');
   var canvas=document.getElementById('fx'), ctx=canvas.getContext('2d');
-  var W,H,DPR,cx,cy,R, sprT,sprC,sprW, nodes=[],edges=[],imp=[],flow=[],dust=[];
+  var W,H,DPR,cx,cy,R, sprT,sprC,sprW, nodes=[],edges=[],flow=[],dust=[];
 
   function sprite(r,g,b){var c=document.createElement('canvas');c.width=c.height=24;var x=c.getContext('2d');
     var gr=x.createRadialGradient(12,12,0,12,12,12);gr.addColorStop(0,'rgba('+r+','+g+','+b+',1)');gr.addColorStop(0.3,'rgba('+r+','+g+','+b+',0.5)');gr.addColorStop(1,'rgba('+r+','+g+','+b+',0)');
@@ -153,10 +164,9 @@
     for(var a=0;a<nodes.length;a++){var deg=0;
       for(var b=a+1;b<nodes.length;b++){var dx=nodes[a].x-nodes[b].x,dy=nodes[a].y-nodes[b].y;
         if(dx*dx+dy*dy<(R*0.24)*(R*0.24)){edges.push([a,b]);if(++deg>2)break;}}}
-    imp=[];for(var e=0;e<edges.length;e++)if(Math.random()<0.5)imp.push({e:e,t:Math.random(),spd:0.006+Math.random()*0.009});
-    dust=[];for(var i=0;i<26;i++)dust.push(mkDust());flow=[];
+    dust=[];for(var i=0;i<24;i++)dust.push(mkDust());flow=[];
   }
-  function mkDust(){return{x:cx+R*(0.4+Math.random()*0.95),y:cy+(Math.random()*2-1)*R*0.9,vx:0.1+Math.random()*0.45,vy:(Math.random()-0.5)*0.3,sz:3+Math.random()*5,ph:Math.random()*6.28,sp:0.6+Math.random()*1.1};}
+  function mkDust(){return{x:cx+R*(0.4+Math.random()*0.95),y:cy+(Math.random()*2-1)*R*0.9,vx:0.08+Math.random()*0.32,vy:(Math.random()-0.5)*0.22,sz:3+Math.random()*5,ph:Math.random()*6.28,sp:0.5+Math.random()*0.9};}
   function resize(){var r=stage.getBoundingClientRect();W=r.width;H=r.height;DPR=Math.min(window.devicePixelRatio||1,1.5);
     canvas.style.width=W+'px';canvas.style.height=H+'px';canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);ctx.setTransform(DPR,0,0,DPR,0,0);
     cx=W*0.5;cy=H*0.5;R=Math.min(W,H)*0.40;sprT=sprite(120,225,210);sprC=sprite(255,140,110);sprW=sprite(255,244,230);build();}
@@ -164,30 +174,33 @@
   function draw(t){
     ctx.clearRect(0,0,W,H);ctx.globalCompositeOperation='lighter';var step=reduce?0:1;
 
-    /* synapse links (single path, cheap) */
-    ctx.strokeStyle='rgba(79,209,197,0.18)';ctx.lineWidth=0.8;ctx.beginPath();
-    for(var e=0;e<edges.length;e++){var A=nodes[edges[e][0]],B=nodes[edges[e][1]];ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);}
+    /* gentle vertical sway offset per node -> links ripple top-to-bottom */
+    var oy=[]; for(var n0=0;n0<nodes.length;n0++){oy[n0]=nodes[n0].y + Math.sin(t*0.55 - nodes[n0].y*0.011 + nodes[n0].ph)*(R*0.026);}
+
+    /* synapse links (single path) */
+    ctx.strokeStyle='rgba(79,209,197,0.2)';ctx.lineWidth=0.9;ctx.beginPath();
+    for(var e=0;e<edges.length;e++){var A=edges[e][0],B=edges[e][1];ctx.moveTo(nodes[A].x,oy[A]);ctx.lineTo(nodes[B].x,oy[B]);}
     ctx.stroke();
     /* nodes pulsing */
-    for(var n=0;n<nodes.length;n++){var nd=nodes[n],pu=0.5+0.5*Math.sin(t*2+nd.ph),sz=5+pu*5;ctx.globalAlpha=0.35+0.4*pu;ctx.drawImage(sprT,nd.x-sz/2,nd.y-sz/2,sz,sz);}
-    /* impulses running along links */
-    if(step)for(var m=0;m<imp.length;m++){var q=imp[m];q.t+=q.spd;if(q.t>1)q.t-=1;var ed=edges[q.e],a2=nodes[ed[0]],b2=nodes[ed[1]];
-      var x=a2.x+(b2.x-a2.x)*q.t,y=a2.y+(b2.y-a2.y)*q.t;ctx.globalAlpha=0.9;ctx.drawImage(sprW,x-4,y-4,8,8);}
+    for(var n=0;n<nodes.length;n++){var pu=0.5+0.5*Math.sin(t*1.6+nodes[n].ph),sz=5+pu*5;ctx.globalAlpha=0.35+0.4*pu;ctx.drawImage(sprT,nodes[n].x-sz/2,oy[n]-sz/2,sz,sz);}
     ctx.globalAlpha=1;
 
-    /* dust neurons drifting around the hemisphere */
-    for(var i=0;i<dust.length;i++){var d=dust[i];d.x+=d.vx*step;d.y+=(d.vy+Math.sin(t*0.6+d.ph)*0.12)*step;
+    /* dust neurons drifting slowly around the hemisphere */
+    for(var i=0;i<dust.length;i++){var d=dust[i];d.x+=d.vx*step;d.y+=(d.vy+Math.sin(t*0.5+d.ph)*0.1)*step;
       if(d.x>cx+R*1.45||d.y<cy-R*1.05||d.y>cy+R*1.05){var q2=mkDust();d.x=q2.x;d.y=q2.y;d.vx=q2.vx;d.vy=q2.vy;}
-      var tw=0.3+0.7*Math.sin(t*d.sp+d.ph),sz2=d.sz*(0.6+0.6*tw);ctx.globalAlpha=0.5*tw;ctx.drawImage(sprT,d.x-sz2/2,d.y-sz2/2,sz2,sz2);}
+      var tw=0.3+0.7*Math.sin(t*d.sp+d.ph),sz2=d.sz*(0.6+0.6*tw);ctx.globalAlpha=0.45*tw;ctx.drawImage(sprT,d.x-sz2/2,d.y-sz2/2,sz2,sz2);}
     ctx.globalAlpha=1;
 
-    /* idea -> realization flow across the fissure (coral -> teal) */
-    if(step){if(flow.length<14&&Math.random()<0.6){flow.push({x:cx-R*0.42,y:cy+(Math.random()*2-1)*R*0.55,vx:0.9+Math.random()*0.9,vy:(Math.random()-0.5)*0.2,life:0,max:90+Math.random()*40,sz:5+Math.random()*4});}
-      for(var f=flow.length-1;f>=0;f--){var p=flow[f];p.life++;p.x+=p.vx;p.y+=p.vy;var lt=p.life/p.max;
-        if(lt>=1||p.x>cx+R*0.55){flow.splice(f,1);continue;}
-        var mt=Math.max(0,Math.min(1,(p.x-(cx-R*0.18))/(R*0.26))),near=Math.abs(p.x-cx)<R*0.06,al=Math.sin(lt*Math.PI);
-        ctx.globalAlpha=al*0.85;ctx.drawImage(mt<0.5?sprC:sprT,p.x-p.sz/2,p.y-p.sz/2,p.sz*(near?1.6:1),p.sz*(near?1.6:1));
-        if(near){ctx.globalAlpha=al;ctx.drawImage(sprW,p.x-p.sz*0.6,p.y-p.sz*0.6,p.sz*1.2,p.sz*1.2);}}
+    /* slow idea -> realization flow; coral on the left, snaps to teal the moment it crosses the fissure */
+    if(step){if(flow.length<11&&Math.random()<0.32){flow.push({x:cx-R*0.52,y:cy+(Math.random()*2-1)*R*0.5,vx:0.26+Math.random()*0.24,vy:(Math.random()-0.5)*0.06,life:0,max:1,sz:5.5+Math.random()*3.5});}
+      for(var f=flow.length-1;f>=0;f--){var p=flow[f];p.x+=p.vx*step;p.y+=p.vy*step;
+        if(p.x>cx+R*0.62){flow.splice(f,1);continue;}
+        var right=p.x>=cx, near=Math.abs(p.x-cx)<R*0.045;
+        var edge=Math.min(1,(p.x-(cx-R*0.52))/(R*0.14), (cx+R*0.62-p.x)/(R*0.18)); /* fade in/out at ends */
+        ctx.globalAlpha=Math.max(0,edge)*0.92;
+        ctx.drawImage(right?sprT:sprC, p.x-p.sz/2, p.y-p.sz/2, p.sz*(near?1.7:1), p.sz*(near?1.7:1));
+        if(near){ctx.globalAlpha=Math.max(0,edge);ctx.drawImage(sprW,p.x-p.sz*0.7,p.y-p.sz*0.7,p.sz*1.4,p.sz*1.4);}
+      }
     }
     ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
   }
