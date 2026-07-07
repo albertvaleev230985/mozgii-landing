@@ -31,12 +31,13 @@
   .cursor-dot{position:fixed;top:0;left:0;width:6px;height:6px;background:var(--coral);border-radius:50%;pointer-events:none;z-index:10000;transform:translate(-50%,-50%)}
   @media (hover:none){body{cursor:auto}.cursor,.cursor-dot{display:none}}
 
-  .hero{position:relative;min-height:100svh;width:100%;display:grid;grid-template-columns:1.04fr 1fr;align-items:center;gap:clamp(16px,3vw,56px);padding:clamp(20px,4vw,64px);overflow:hidden}
+  .hero{position:relative;min-height:100svh;width:100%;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;gap:clamp(4px,1vw,24px);padding:clamp(20px,4vw,64px);overflow:hidden}
   .hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
     background:linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px);
-    background-size:50px 50px;mask-image:radial-gradient(circle at 64% 46%,#000 22%,transparent 72%)}
+    background-size:50px 50px;mask-image:radial-gradient(circle at 62% 48%,#000 24%,transparent 74%)}
   .hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-    background:radial-gradient(44vw 44vw at 70% 46%,rgba(255,111,97,0.12),transparent 62%),
+    background:radial-gradient(42vw 42vw at 62% 48%,rgba(255,111,97,0.1),transparent 60%),
+      radial-gradient(34vw 34vw at 74% 48%,rgba(79,209,197,0.08),transparent 60%),
       linear-gradient(180deg,var(--night),#080D1A 60%,var(--night-deep))}
 
   .topbar{position:absolute;z-index:5;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:clamp(18px,3vw,30px) clamp(20px,4vw,64px)}
@@ -44,14 +45,14 @@
   .brandmark b{color:var(--coral);font-weight:800}
   .topbar .role{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid)}
 
-  .copy{position:relative;z-index:3;max-width:640px}
+  .copy{position:relative;z-index:3;max-width:600px}
   .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);display:flex;align-items:center;gap:10px;margin-bottom:24px}
   .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral);box-shadow:0 0 12px var(--coral)}
   h1{font-size:clamp(3rem,7.6vw,5.8rem);font-weight:800;line-height:.96;letter-spacing:-.03em;margin-bottom:24px}
   h1 .q{color:var(--mid);font-weight:600}
   h1 .m{color:var(--ivory)}
   h1 .ii{color:var(--coral)}
-  .rule{height:3px;width:200px;border-radius:3px;margin:0 0 26px;background:linear-gradient(90deg,var(--coral),var(--coral-deep));box-shadow:0 0 18px var(--coral-glow);transform-origin:left center}
+  .rule{height:3px;width:200px;border-radius:3px;margin:0 0 26px;background:linear-gradient(90deg,var(--coral),var(--teal));box-shadow:0 0 18px var(--coral-glow);transform-origin:left center}
   .lead{font-size:clamp(1.15rem,2.3vw,1.6rem);font-weight:400;line-height:1.36;color:#CDD2E0;max-width:24ch;margin-bottom:40px}
   .lead .acc{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--coral);font-size:1.12em}
   .lead .acc-r{color:var(--teal)}
@@ -68,14 +69,14 @@
   .btn.ghost{background:transparent;color:var(--ivory);border:1.5px solid var(--rule)}
   .btn.ghost:hover{background:rgba(255,255,255,.05);border-color:var(--coral);box-shadow:none}
 
-  /* brain stage */
-  .stage{position:relative;z-index:2;width:100%;aspect-ratio:1/1;max-height:88svh;justify-self:center}
-  .halo{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:1;width:52%;height:60%;top:20%;animation:breathe 6.5s ease-in-out infinite}
-  .halo-l{left:5%;background:radial-gradient(circle,rgba(255,111,97,.34),transparent 70%)}
-  .halo-r{right:5%;background:radial-gradient(circle,rgba(79,209,197,.24),transparent 70%);animation-direction:reverse}
+  /* brain stage — bigger, pulled toward the text */
+  .stage{position:relative;z-index:2;width:112%;aspect-ratio:1/1;max-height:96svh;justify-self:start;margin-left:-10%}
+  .halo{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:1;width:48%;height:56%;top:22%;animation:breathe 6.5s ease-in-out infinite}
+  .halo-l{left:12%;background:radial-gradient(circle,rgba(255,111,97,.32),transparent 70%)}
+  .halo-r{right:12%;background:radial-gradient(circle,rgba(79,209,197,.24),transparent 70%);animation-direction:reverse}
   @keyframes breathe{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:.9;transform:scale(1.06)}}
   #brainWrap{position:absolute;inset:0;z-index:2;will-change:transform}
-  .brain-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:scale(.94);transition:opacity 1.3s ease,transform 1.3s cubic-bezier(.16,1,.3,1);filter:saturate(1.02)}
+  .brain-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:scale(.94);transition:opacity 1.3s ease,transform 1.3s cubic-bezier(.16,1,.3,1)}
   .ready .brain-img{opacity:1;transform:scale(1)}
   #fx{position:absolute;inset:0;z-index:3;width:100%;height:100%;pointer-events:none}
 
@@ -91,7 +92,7 @@
 
   @media (max-width:900px){
     .hero{grid-template-columns:1fr;grid-template-rows:auto auto;padding-top:84px;gap:8px}
-    .stage{order:-1;max-height:38svh;aspect-ratio:1/1;width:82%;margin:0 auto}
+    .stage{order:-1;max-height:40svh;aspect-ratio:1/1;width:92%;margin:0 auto}
     .copy{max-width:none}
     .meta{grid-template-columns:1fr 1fr;gap:16px 24px}
     .hint{display:none}
@@ -142,41 +143,96 @@
   </section>
 
 <script>
-/* ===== fx particles around the brain (ambient sparks, dissolve, idea->realization flow) ===== */
+/* ===== Neural net over the digital hemisphere + center "magic" interaction ===== */
 (function(){
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
   var stage=document.querySelector('.stage'), wrap=document.getElementById('brainWrap');
   var canvas=document.getElementById('fx'), ctx=canvas.getContext('2d');
-  var W,H,DPR,cx,cy,R,parts=[],flow=[];
-  function resize(){var r=stage.getBoundingClientRect();W=r.width;H=r.height;DPR=Math.min(window.devicePixelRatio||1,2);
+  var W,H,DPR,cx,cy,R;                 /* cx = central fissure x */
+  var amb=[], nodes=[], edges=[], imp=[], flow=[], arcs=[], sparks=[];
+  var FISS=0.5;                        /* fissure position (fraction of width) */
+
+  function resize(){
+    var r=stage.getBoundingClientRect();W=r.width;H=r.height;DPR=Math.min(window.devicePixelRatio||1,2);
     canvas.style.width=W+'px';canvas.style.height=H+'px';canvas.width=Math.round(W*DPR);canvas.height=Math.round(H*DPR);ctx.setTransform(DPR,0,0,DPR,0,0);
-    cx=W*0.5;cy=H*0.5;R=Math.min(W,H)*0.42;
-    parts=[];for(var i=0;i<46;i++)parts.push(mk());}
-  function mk(){var a=Math.random()*6.28,rr=R*(0.55+Math.random()*0.62);return{x:cx+Math.cos(a)*rr,y:cy+Math.sin(a)*rr*0.92,r:0.6+Math.random()*1.6,ph:Math.random()*6.28,sp:0.2+Math.random()*0.5,drift:(Math.random()*0.3+0.1)};}
+    cx=W*FISS;cy=H*0.5;R=Math.min(W,H)*0.40;
+    amb=[];for(var i=0;i<38;i++)amb.push(A());
+    /* neural nodes inside the RIGHT (digital) hemisphere ellipse */
+    nodes=[];var ex=cx+R*0.40, ay=R*0.60, ax=R*0.50, g=0;
+    while(nodes.length<42 && g<4000){g++;
+      var nx=cx+R*0.04+Math.random()*R*0.92, ny=cy+(Math.random()*2-1)*R*0.78;
+      var dx=(nx-ex)/ax, dy=(ny-cy)/ay;
+      if(dx*dx+dy*dy<=1) nodes.push({x:nx,y:ny,ph:Math.random()*6.28});
+    }
+    edges=[];
+    for(var a=0;a<nodes.length;a++){var deg=0;
+      for(var b=a+1;b<nodes.length;b++){var ddx=nodes[a].x-nodes[b].x,ddy=nodes[a].y-nodes[b].y;
+        if(ddx*ddx+ddy*ddy<(R*0.30)*(R*0.30)){edges.push([a,b]);if(++deg>3)break;}}}
+    imp=[];for(var e=0;e<edges.length;e++)if(Math.random()<0.55)imp.push({e:e,t:Math.random(),spd:0.006+Math.random()*0.01});
+    flow=[];arcs=[];sparks=[];
+  }
+  function A(){var an=Math.random()*6.28,rr=R*(0.5+Math.random()*0.7);return{x:cx+Math.cos(an)*rr,y:cy+Math.sin(an)*rr*0.9,r:0.5+Math.random()*1.5,ph:Math.random()*6.28,sp:0.2+Math.random()*0.5,dr:0.06+Math.random()*0.16};}
+
   function draw(t){
     ctx.clearRect(0,0,W,H);ctx.globalCompositeOperation='lighter';
-    /* ambient sparks */
-    for(var i=0;i<parts.length;i++){var p=parts[i];p.x+=p.drift*0.5;if(p.x>cx+R*1.25)p.x=cx-R*0.2+Math.random()*R*0.4;
+
+    /* ambient sparks: coral left, teal right */
+    for(var i=0;i<amb.length;i++){var p=amb[i];p.x+=p.dr*0.4;if(p.x>cx+R*1.2)p.x=cx-R*1.1;
       var tw=0.4+0.6*Math.sin(t*p.sp+p.ph),teal=p.x>cx;
       ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);
-      ctx.fillStyle=teal?'rgba(120,220,205,'+(0.24*tw)+')':'rgba(255,150,120,'+(0.24*tw)+')';
-      ctx.shadowBlur=7;ctx.shadowColor=teal?'rgba(79,209,197,0.7)':'rgba(255,111,97,0.7)';ctx.fill();}
+      ctx.fillStyle=teal?'rgba(120,220,205,'+(0.22*tw)+')':'rgba(255,150,120,'+(0.22*tw)+')';
+      ctx.shadowBlur=6;ctx.shadowColor=teal?'rgba(79,209,197,.7)':'rgba(255,111,97,.7)';ctx.fill();}
     ctx.shadowBlur=0;
-    /* right-edge dissolve particles */
-    if(!reduce){if(flow.length<40&&Math.random()<0.7){var yy=cy+(Math.random()*2-1)*R*0.7;flow.push({x:cx+R*0.42,y:yy,vx:0.5+Math.random()*1.1,vy:(Math.random()-0.5)*0.3,life:0,max:70+Math.random()*60,s:0.7+Math.random()*1.5});}
-      for(var f=flow.length-1;f>=0;f--){var q=flow[f];q.life++;q.x+=q.vx;q.y+=q.vy;var lt=q.life/q.max;if(lt>=1){flow.splice(f,1);continue;}
-        ctx.beginPath();ctx.arc(q.x,q.y,q.s,0,6.28);ctx.fillStyle='rgba(140,225,210,'+Math.sin(lt*Math.PI)*0.75+')';ctx.shadowBlur=8;ctx.shadowColor='rgba(79,209,197,0.85)';ctx.fill();}
-      ctx.shadowBlur=0;}
+
+    /* neural network on the digital hemisphere */
+    ctx.lineWidth=0.8;
+    for(var e=0;e<edges.length;e++){var Aa=nodes[edges[e][0]],Bb=nodes[edges[e][1]];
+      ctx.beginPath();ctx.moveTo(Aa.x,Aa.y);ctx.lineTo(Bb.x,Bb.y);ctx.strokeStyle='rgba(79,209,197,0.16)';ctx.stroke();}
+    for(var n=0;n<nodes.length;n++){var nd=nodes[n],pu=0.55+0.45*Math.sin(t*2.2+nd.ph);
+      ctx.beginPath();ctx.arc(nd.x,nd.y,1.1+pu*1.0,0,6.28);ctx.fillStyle='rgba(160,235,225,'+(0.5+0.4*pu)+')';ctx.shadowBlur=8;ctx.shadowColor='rgba(79,209,197,0.9)';ctx.fill();}
+    ctx.shadowBlur=0;
+    if(!reduce)for(var m=0;m<imp.length;m++){var q=imp[m];q.t+=q.spd;if(q.t>1)q.t-=1;var ed=edges[q.e],a2=nodes[ed[0]],b2=nodes[ed[1]];
+      var x=a2.x+(b2.x-a2.x)*q.t,y=a2.y+(b2.y-a2.y)*q.t;
+      ctx.beginPath();ctx.arc(x,y,1.7,0,6.28);ctx.fillStyle='rgba(210,255,248,0.95)';ctx.shadowBlur=10;ctx.shadowColor='rgba(120,240,220,0.95)';ctx.fill();}
+    ctx.shadowBlur=0;
+
+    if(!reduce){
+      /* center magic: flashing sparks along the fissure */
+      if(sparks.length<26&&Math.random()<0.9){sparks.push({x:cx+(Math.random()-0.5)*R*0.1,y:cy+(Math.random()*2-1)*R*0.72,life:0,max:14+Math.random()*16,s:0.6+Math.random()*1.6});}
+      for(var s=sparks.length-1;s>=0;s--){var sp=sparks[s];sp.life++;var lt=sp.life/sp.max;if(lt>=1){sparks.splice(s,1);continue;}
+        var al=Math.sin(lt*Math.PI);ctx.beginPath();ctx.arc(sp.x,sp.y,sp.s,0,6.28);ctx.fillStyle='rgba(255,240,225,'+al+')';ctx.shadowBlur=10;ctx.shadowColor='rgba(255,190,140,0.9)';ctx.fill();}
+      ctx.shadowBlur=0;
+
+      /* idea -> realization flow crossing the fissure (coral -> teal, burst at center) */
+      if(flow.length<30&&Math.random()<0.85){var yy=cy+(Math.random()*2-1)*R*0.6;flow.push({x:cx-R*0.55,y:yy,vx:0.9+Math.random()*1.0,vy:(Math.random()-0.5)*0.2,life:0,max:120+Math.random()*70,s:1+Math.random()*1.3,burst:0});}
+      for(var f=flow.length-1;f>=0;f--){var fl=flow[f];fl.life++;fl.x+=fl.vx;fl.y+=fl.vy;var lt2=fl.life/fl.max;
+        if(lt2>=1||fl.x>cx+R*0.85){flow.splice(f,1);continue;}
+        var mt=Math.max(0,Math.min(1,(fl.x-(cx-R*0.28))/(R*0.32)));
+        var near=Math.abs(fl.x-cx)<R*0.06; var sz=fl.s*(near?2.2:1);
+        var cr=255,cg=(111+(211-111)*mt)|0,cb=(97+(197-97)*mt)|0;
+        ctx.beginPath();ctx.arc(fl.x,fl.y,sz,0,6.28);ctx.fillStyle='rgba('+cr+','+cg+','+cb+','+Math.sin(lt2*Math.PI)+')';
+        ctx.shadowBlur=near?16:8;ctx.shadowColor='rgba(255,220,190,0.9)';ctx.fill();}
+      ctx.shadowBlur=0;
+
+      /* synapse arcs: from a left point, through the center, to a right neural node */
+      if(arcs.length<3&&Math.random()<0.04&&nodes.length){var tgt=nodes[(Math.random()*nodes.length)|0];
+        arcs.push({x0:cx-R*(0.3+Math.random()*0.4),y0:cy+(Math.random()*2-1)*R*0.5,x1:tgt.x,y1:tgt.y,cxp:cx+(Math.random()-0.5)*R*0.1,cyp:cy+(Math.random()*2-1)*R*0.3,life:0,max:34+Math.random()*20});}
+      for(var ar=arcs.length-1;ar>=0;ar--){var A2=arcs[ar];A2.life++;var p2=A2.life/A2.max;if(p2>=1){arcs.splice(ar,1);continue;}
+        var seg=Math.min(1,p2*1.4);ctx.beginPath();ctx.moveTo(A2.x0,A2.y0);
+        var steps=18;for(var st=1;st<=steps*seg;st++){var u=st/steps,iu=1-u;var bx=iu*iu*A2.x0+2*iu*u*A2.cxp+u*u*A2.x1,by=iu*iu*A2.y0+2*iu*u*A2.cyp+u*u*A2.y1;ctx.lineTo(bx,by);}
+        var ga=Math.sin(p2*Math.PI);var grd=ctx.createLinearGradient(A2.x0,A2.y0,A2.x1,A2.y1);grd.addColorStop(0,'rgba(255,140,110,'+ga+')');grd.addColorStop(1,'rgba(120,235,220,'+ga+')');
+        ctx.strokeStyle=grd;ctx.lineWidth=1.4;ctx.shadowBlur=10;ctx.shadowColor='rgba(255,240,225,'+ga+')';ctx.stroke();}
+      ctx.shadowBlur=0;
+    }
     ctx.globalCompositeOperation='source-over';
   }
   resize();var rz;window.addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(resize,150);});
   if(reduce){draw(0);}else{(function loop(ts){draw((ts||0)*0.001);requestAnimationFrame(loop);})();}
 
-  /* parallax + idle float */
   if(!reduce){var tx=0,ty=0,ux=0,uy=0,hero=document.getElementById('hero');
     hero.addEventListener('mousemove',function(e){var r=hero.getBoundingClientRect();tx=(e.clientX-r.left)/r.width-0.5;ty=(e.clientY-r.top)/r.height-0.5;});
     hero.addEventListener('mouseleave',function(){tx=0;ty=0;});
-    (function pl(ts){ux+=(tx-ux)*0.05;uy+=(ty-uy)*0.05;var fl=Math.sin((ts||0)*0.0006)*4;wrap.style.transform='translate('+(ux*14)+'px,'+(uy*10+fl)+'px)';requestAnimationFrame(pl);})();}
+    (function pl(ts){ux+=(tx-ux)*0.05;uy+=(ty-uy)*0.05;var fl=Math.sin((ts||0)*0.0006)*3;wrap.style.transform='translate('+(ux*12)+'px,'+(uy*9+fl)+'px)';requestAnimationFrame(pl);})();}
 })();
 
 /* reveal + cursor */
