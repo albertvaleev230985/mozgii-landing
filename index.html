@@ -100,6 +100,40 @@
   }
   @media (max-width:420px){.meta{grid-template-columns:1fr 1fr}.btn{flex:1;justify-content:center}}
   @media (prefers-reduced-motion:reduce){.reveal{transition:none;opacity:1;transform:none}.halo,.hint .ch{animation:none}.brain-img{opacity:1;transform:none}}
+
+  /* ================= SECTIONS ================= */
+  .s{position:relative;z-index:2;padding:clamp(72px,10vw,124px) 0}
+  .wrap{max-width:1220px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+  .s-head{max-width:860px;margin-bottom:clamp(38px,5vw,64px)}
+  .t-cap{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--coral);margin-bottom:18px;display:flex;align-items:center;gap:11px}
+  .t-cap::before{content:"";width:26px;height:1px;background:var(--coral)}
+  .s-head h2{font-size:clamp(2rem,4.7vw,3.5rem);font-weight:800;line-height:1.05;letter-spacing:-.028em;color:var(--ivory);text-wrap:balance}
+  .s-head h2 .em{font-family:var(--serif);font-style:italic;font-weight:400}
+  .s-head h2 .em.c{color:var(--coral)}.s-head h2 .em.t{color:var(--teal)}
+  .s-head .lead{font-size:clamp(1.05rem,1.8vw,1.3rem);color:#AEB4C4;margin-top:20px;line-height:1.5;max-width:62ch}
+
+  .pain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:clamp(14px,1.6vw,20px)}
+  .pain-card{background:var(--night-soft);border:1px solid var(--rule);border-radius:18px;padding:clamp(22px,2.4vw,30px);transition:transform .3s ease,border-color .3s ease}
+  .pain-card:hover{transform:translateY(-5px);border-color:rgba(255,111,97,.45)}
+  .pain-card .qm{font-family:var(--serif);font-size:46px;line-height:.5;color:var(--coral);opacity:.55}
+  .pain-card p{font-size:16.5px;line-height:1.48;color:#D6DAE4;margin:16px 0 18px}
+  .pain-card .who{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mid)}
+
+  .shift{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,26px);margin-top:8px}
+  .shift-col{position:relative;border-radius:20px;padding:clamp(26px,3vw,40px);border:1px solid var(--rule);overflow:hidden}
+  .shift-col.was{background:linear-gradient(180deg,#0E1320,#0B1019)}
+  .shift-col.now{background:linear-gradient(180deg,rgba(255,111,97,.06),rgba(79,209,197,.05));border-color:rgba(255,111,97,.3)}
+  .shift-col .step{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+  .shift-col.was .step{color:var(--mid)}.shift-col.now .step{color:var(--coral)}
+  .shift-col h3{font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:800;letter-spacing:-.02em;color:var(--ivory);margin-bottom:20px;line-height:1.12}
+  .shift-col ul{list-style:none;display:flex;flex-direction:column;gap:13px}
+  .shift-col li{position:relative;padding-left:26px;font-size:15.5px;line-height:1.45;color:#C7CCD8}
+  .shift-col li::before{content:"";position:absolute;left:0;top:9px;width:12px;height:2px;border-radius:2px}
+  .shift-col.was li::before{background:var(--mid)}.shift-col.now li::before{background:linear-gradient(90deg,var(--coral),var(--teal))}
+  .shift-col .tagline{margin-top:22px;padding-top:20px;border-top:1px solid var(--rule);font-size:15px;color:#AEB4C4}
+  .shift-col .tagline b{color:var(--ivory);font-weight:700}
+
+  @media(max-width:760px){.shift{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -142,6 +176,60 @@
     </div>
 
     <div class="hint"><span>листайте</span><span class="ch"></span></div>
+  </section>
+
+  <!-- ============ УЗНАВАНИЕ / БОЛЬ ============ -->
+  <section class="s" id="pain">
+    <div class="wrap">
+      <div class="s-head">
+        <div class="t-cap reveal">Знакомо?</div>
+        <h2 class="reveal d1">У вас есть идея. А рук, чтобы её <span class="em c">собрать</span>, нет.</h2>
+        <p class="lead reveal d2">Хотя бы одно узнали? Значит, вы по адресу. «мозгИИ» ровно про то, как перестать этого ждать и начать делать своими руками, вместе с ИИ.</p>
+      </div>
+      <div class="pain-grid">
+        <div class="pain-card reveal"><div class="qm">«</div><p>В голове десяток идей: сайт, бот, калькулятор, CRM. Но я не программист, и собрать их некому.</p><div class="who">идея есть, рук нет</div></div>
+        <div class="pain-card reveal d1"><div class="qm">«</div><p>ChatGPT красиво отвечает и советует, но до готового работающего продукта дело так и не доходит.</p><div class="who">ассистент не доводит</div></div>
+        <div class="pain-card reveal d2"><div class="qm">«</div><p>Заказать разработчику — это деньги, сроки и переписки. А хочется проверить идею здесь и сейчас.</p><div class="who">дорого и долго</div></div>
+        <div class="pain-card reveal"><div class="qm">«</div><p>Пробовал вайб-кодинг сам, но утонул в установках, деплое и ошибках. Бросил на полпути.</p><div class="who">начал и застрял</div></div>
+        <div class="pain-card reveal d1"><div class="qm">«</div><p>Инструментов вокруг море, а системы нет. Всё разрознено, и непонятно, с какой стороны зайти.</p><div class="who">хаос вместо системы</div></div>
+        <div class="pain-card reveal d2"><div class="qm">«</div><p>Надоело быть просто потребителем нейросетей. Хочу не пользоваться чужим, а создавать своё.</p><div class="who">хочу создавать</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ СДВИГ: ШАГ 1 -> ШАГ 2 ============ -->
+  <section class="s" id="shift">
+    <div class="wrap">
+      <div class="s-head">
+        <div class="t-cap reveal">Сдвиг</div>
+        <h2 class="reveal d1">Шаг 1 научил <span class="em c">пользоваться</span> ИИ. Шаг 2 научит им <span class="em t">создавать</span>.</h2>
+        <p class="lead reveal d2">«ИИ. Новая реальность» дала фундамент: как думать и говорить с нейросетями. «мозгИИ» это следующий этаж. Вы даёте идею, ИИ даёт руки. Мозг человека и мозг машины работают в паре.</p>
+      </div>
+      <div class="shift">
+        <div class="shift-col was reveal">
+          <div class="step">Шаг 1 · Новая реальность</div>
+          <h3>Вы пользуетесь ИИ</h3>
+          <ul>
+            <li>Задаёте вопросы, пишете промпты</li>
+            <li>Собираете личных ассистентов в чате</li>
+            <li>Ускоряете задачи, которые делали и раньше</li>
+            <li>Работаете внутри готовых сервисов</li>
+          </ul>
+          <div class="tagline">Итог: вы <b>уверенный пользователь</b> ИИ.</div>
+        </div>
+        <div class="shift-col now reveal d1">
+          <div class="step">Шаг 2 · мозгИИ</div>
+          <h3>Вы создаёте с ИИ</h3>
+          <ul>
+            <li>Собираете свои продукты: сайты, боты, CRM, дашборды</li>
+            <li>Доводите идею от папки на компьютере до живой ссылки</li>
+            <li>Автоматизируете свои процессы через одно окно</li>
+            <li>Запускаете собственного агента, что работает за вас</li>
+          </ul>
+          <div class="tagline">Итог: у вас <b>руки, которые строят</b>, и агент, что работает 24/7.</div>
+        </div>
+      </div>
+    </div>
   </section>
 
 <script>
