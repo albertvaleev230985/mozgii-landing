@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Выбор мозга · мозгИИ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Onest:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{--night:#0A0F1E;--coral:#FF6F61;--teal:#4FD1C5;--ivory:#F4F1EA;--mid:#6B7185;
+    --sans:'Onest',-apple-system,system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--night);color:var(--ivory);font-family:var(--sans);padding:clamp(24px,5vw,56px);min-height:100vh}
+  .head{max-width:1100px;margin:0 auto 32px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:12px}
+  h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.02em}
+  h1 b{color:var(--coral)}
+  p{color:#CDD2E0;margin-top:12px;max-width:60ch;line-height:1.5}
+  .grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.5vw,28px)}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{position:relative;background:radial-gradient(circle at 50% 42%,rgba(255,111,97,.06),transparent 62%),#0C1120;border:1px solid rgba(255,255,255,.08);border-radius:20px;overflow:hidden;transition:border-color .25s,transform .25s}
+  .card:hover{border-color:var(--coral);transform:translateY(-4px)}
+  .card img{width:100%;aspect-ratio:1/1;object-fit:contain;display:block}
+  .tag{position:absolute;top:14px;left:14px;display:flex;align-items:center;gap:10px}
+  .num{width:38px;height:38px;border-radius:50%;background:var(--coral);color:var(--night);font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center}
+  .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#CDD2E0;background:rgba(10,15,30,.7);padding:6px 10px;border-radius:8px}
+  .foot{max-width:1100px;margin:28px auto 0;font-family:var(--mono);font-size:13px;color:var(--mid)}
+</style>
+</head>
+<body>
+  <div class="head">
+    <div class="eyebrow">neovida · мозгИИ · выбор визуала</div>
+    <h1>Какой <b>мозг</b> берём в hero?</h1>
+    <p>4 варианта: реалистичный мозг, левое полушарие коралл (человек, идея), правое бирюза (ИИ, реализация). Цвета ещё подведу точно под бренд. Скажи номер, который заходит по форме и ракурсу.</p>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="tag"><span class="num">1</span><span class="lbl">вид сбоку · профиль</span></div><img src="assets/picks/1.png" alt="Вариант 1"></div>
+    <div class="card"><div class="tag"><span class="num">2</span><span class="lbl">три четверти · чистое деление</span></div><img src="assets/picks/2.png" alt="Вариант 2"></div>
+    <div class="card"><div class="tag"><span class="num">3</span><span class="lbl">три четверти · распад частиц</span></div><img src="assets/picks/3.png" alt="Вариант 3"></div>
+    <div class="card"><div class="tag"><span class="num">4</span><span class="lbl">спереди · симметрично</span></div><img src="assets/picks/4.png" alt="Вариант 4"></div>
+  </div>
+  <div class="foot">Выбери номер (можно с правками: ярче, крупнее мозжечок, больше распада и т.д.)</div>
+</body>
+</html>
