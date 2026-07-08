@@ -134,6 +134,38 @@
   .shift-col .tagline b{color:var(--ivory);font-weight:700}
 
   @media(max-width:760px){.shift{grid-template-columns:1fr}}
+
+  /* ============ БОЛЬШАЯ ИДЕЯ · ТРИ ЭТАЖА ============ */
+  .floors{display:flex;flex-direction:column;gap:16px;margin-top:8px}
+  .floor{position:relative;display:grid;grid-template-columns:1fr;gap:16px;background:var(--night-soft);border:1px solid var(--rule);border-radius:22px;padding:clamp(24px,3vw,38px);overflow:hidden;transition:transform .38s cubic-bezier(.16,1,.3,1),border-color .38s ease,box-shadow .38s ease}
+  @media(min-width:880px){.floor{grid-template-columns:128px 1.08fr .82fr;gap:32px;align-items:center}}
+  .floor::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;transform:scaleY(0);transform-origin:bottom;transition:transform .9s cubic-bezier(.16,1,.3,1) .15s}
+  .floor.in::before{transform:scaleY(1)}
+  .floor.f1::before{background:linear-gradient(0deg,var(--coral),rgba(255,111,97,.12))}
+  .floor.f2::before{background:linear-gradient(0deg,var(--teal),rgba(79,209,197,.12))}
+  .floor.f3::before{background:linear-gradient(0deg,var(--gold),rgba(229,184,63,.12))}
+  .floor:hover{transform:translateY(-4px);box-shadow:0 20px 46px -22px rgba(0,0,0,.55)}
+  .floor.f1:hover{border-color:rgba(255,111,97,.5)}
+  .floor.f2:hover{border-color:rgba(79,209,197,.5)}
+  .floor.f3:hover{border-color:rgba(229,184,63,.5)}
+  .floor.f3{background:linear-gradient(140deg,var(--night-soft),#241f1a)}
+  .floor .f-n{font-family:var(--mono);font-weight:800;font-size:clamp(40px,5.4vw,70px);line-height:.9;letter-spacing:-.03em}
+  .floor.f1 .f-n{color:var(--coral)}.floor.f2 .f-n{color:var(--teal)}.floor.f3 .f-n{color:var(--gold)}
+  .floor .f-label{display:block;margin-top:9px;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--mid)}
+  .floor h3{font-size:clamp(1.35rem,2.3vw,1.85rem);font-weight:800;letter-spacing:-.02em;color:var(--ivory);line-height:1.14;margin-bottom:12px}
+  .floor h3 .em{font-family:var(--serif);font-style:italic;font-weight:400}
+  .floor.f1 h3 .em{color:var(--coral)}.floor.f2 h3 .em{color:var(--teal)}.floor.f3 h3 .em{color:var(--gold)}
+  .floor .f-desc{font-size:15.5px;line-height:1.5;color:#C7CCD8}
+  .floor .f-side{display:flex;flex-direction:column;gap:14px}
+  .floor .f-role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mid)}
+  .floor .f-role b{display:block;font-family:var(--body);font-size:15px;font-weight:700;letter-spacing:0;text-transform:none;margin-top:4px}
+  .floor.f1 .f-role b{color:var(--coral)}.floor.f2 .f-role b{color:var(--teal)}.floor.f3 .f-role b{color:var(--gold)}
+  .floor .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .floor .chips span{padding:5px 11px;border-radius:999px;font-family:var(--mono);font-size:11px;letter-spacing:.01em}
+  .floor.f1 .chips span{background:rgba(255,111,97,.08);border:1px solid rgba(255,111,97,.22);color:#F0A99E}
+  .floor.f2 .chips span{background:rgba(79,209,197,.08);border:1px solid rgba(79,209,197,.22);color:#8FE3DA}
+  .floor.f3 .chips span{background:rgba(229,184,63,.08);border:1px solid rgba(229,184,63,.24);color:#EBD08A}
+  @media(max-width:879px){.floor .f-label{display:inline-block;margin-left:12px;margin-top:0}}
 </style>
 </head>
 <body>
@@ -227,6 +259,52 @@
             <li>Запускаете собственного агента, что работает за вас</li>
           </ul>
           <div class="tagline">Итог: у вас <b>руки, которые строят</b>, и агент, что работает 24/7.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ БОЛЬШАЯ ИДЕЯ: ТРИ ЭТАЖА ============ -->
+  <section class="s" id="floors">
+    <div class="wrap">
+      <div class="s-head">
+        <div class="t-cap reveal">Большая идея</div>
+        <h2 class="reveal d1">Одна идея. Три этажа <span class="em t">реализации</span>.</h2>
+        <p class="lead reveal d2">Вход на каждом этаже один и тот же: твоя идея, сказанная словами. Меняется одно. Чем выше поднимаешься, тем меньше делаешь руками и больше решаешь головой. Из исполнителя в архитектора.</p>
+      </div>
+      <div class="floors">
+        <div class="floor f1 reveal">
+          <div class="f-n">01<span class="f-label">Создавать</span></div>
+          <div class="f-main">
+            <h3>Идея становится <span class="em">продуктом</span></h3>
+            <p class="f-desc">Сайт, бот, CRM, дашборд. Ты собираешь их сам, вместе с ИИ, от папки на компьютере до живой ссылки. То, что раньше заказывал за деньги и ждал неделями, теперь делаешь за вечер.</p>
+          </div>
+          <div class="f-side">
+            <div class="f-role">ИИ для тебя<b>Экзоскелет для рук</b></div>
+            <div class="chips"><span>сайт</span><span>бот</span><span>CRM</span><span>дашборд</span><span>калькулятор</span></div>
+          </div>
+        </div>
+        <div class="floor f2 reveal d1">
+          <div class="f-n">02<span class="f-label">Автоматизировать</span></div>
+          <div class="f-main">
+            <h3>Продукт становится <span class="em">процессом</span></h3>
+            <p class="f-desc">Ты соединяешь свои сервисы в одно окно и отдаёшь рутину. Настроил один раз, дальше идёт без тебя, пока ты занят тем, что важнее.</p>
+          </div>
+          <div class="f-side">
+            <div class="f-role">ИИ для тебя<b>Автопилот процессов</b></div>
+            <div class="chips"><span>единое окно</span><span>интеграции</span><span>отчёты</span><span>рассылки</span><span>триггеры</span></div>
+          </div>
+        </div>
+        <div class="floor f3 reveal d2">
+          <div class="f-n">03<span class="f-label">Автономные агенты</span></div>
+          <div class="f-main">
+            <h3>Процесс становится <span class="em">сотрудником</span></h3>
+            <p class="f-desc">Ты запускаешь агента, который сам принимает решения и ведёт задачи к цели круглые сутки. Не помощник в чате, а сотрудник в штате. Ровно как наш Гермес, который уже так работает.</p>
+          </div>
+          <div class="f-side">
+            <div class="f-role">ИИ для тебя<b>Сотрудник в штате</b></div>
+            <div class="chips"><span>свой агент</span><span>память</span><span>расписание</span><span>сам решает</span><span>24/7</span></div>
+          </div>
         </div>
       </div>
     </div>
